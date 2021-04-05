@@ -1,5 +1,5 @@
 let code = `
-const regNo = '';
+const regNo = '20BCE0528';
 const pass = '';
 openPage();
 setTimeout(() => {
@@ -8,7 +8,6 @@ setTimeout(() => {
     document.querySelector("#captcha").click();
 },1000);
 setInterval(function() {
-    //location.reload()
     doRefreshCaptcha();
 },14 * 60 * 1000);`;
 let script = document.createElement('script');

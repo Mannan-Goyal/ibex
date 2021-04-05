@@ -7,5 +7,16 @@
             "matches":["*://vtop.vit.ac.in/*"],
             "js": ["script.js"]
         }
-    ]
+    ],
+    "browser_action": {
+    	"default_popup": "popup.html",
+    	"default_title": "Tophy"
+    },
+    "permissions": [
+    	"storage",
+        "webRequest"
+    ],
+    "background": {
+        "scripts": ["popup.js"]
+    }
 }
