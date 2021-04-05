@@ -13,10 +13,6 @@
     	"default_title": "Tophy"
     },
     "permissions": [
-    	"storage",
-        "webRequest"
-    ],
-    "background": {
-        "scripts": ["popup.js"]
-    }
+        "storage"
+    ]
 }
