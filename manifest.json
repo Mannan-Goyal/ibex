@@ -1,5 +1,5 @@
 {
-    "name": "tophy",
+    "name": "Ibex",
     "version": "1.0",
     "manifest_version":2,
     "content_scripts": [
@@ -10,7 +10,7 @@
     ],
     "browser_action": {
     	"default_popup": "popup.html",
-    	"default_title": "Tophy",
+    	"default_title": "Ibex",
         "default_icon": "icon_128x128.png"
     },
     "icons": {
