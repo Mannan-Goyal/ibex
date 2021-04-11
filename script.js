@@ -1,4 +1,4 @@
-chrome.storage.sync.get(['regno', 'pass'], function (items) {
+browser.storage.local.get(['regno', 'pass']).then((items)=>{
     let code = `
     openPage();
     setTimeout(() => {

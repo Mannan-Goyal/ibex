@@ -1,15 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    chrome.storage.sync.get(null, function (data) { console.info(data) });
+    browser.storage.local.get(null).then((data) => { console.info(data) });
     document.getElementById('subm').addEventListener('click', () => {
         let regno = document.querySelector('#regno').value;
         let pass = document.querySelector('#pass').value;
         console.log(regno, pass);
-        chrome.storage.sync.set({
+        browser.storage.local.set({
             regno: regno,
             pass: pass
-        }, function () {
-            console.log('Credentials Saved!');
-        });
+        }).then(()=>console.log('Credentials Saved!'));
         window.close();
     });
 });
