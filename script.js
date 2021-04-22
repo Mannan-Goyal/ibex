@@ -1243,24 +1243,63 @@ chrome.storage.sync.get(['regno', 'pass'], function (items) {
         }
         while (arr.length) newArr.push(arr.splice(0, 180));
         const res = CaptchaParse(newArr);
-        console.log(res)
         document.querySelector("#captchaCheck").value = res;
         });
     };
 
     setTimeout(() => {
+        try{
         document.querySelector("#uname").value = '${items.regno}';
         document.querySelector("#passwd").value = '${items.pass}';
         let img = document.querySelector("#captchaRefresh > div > img").getAttribute("src")    
         fillCaptcha(img)
+        }catch(e){}
     },1000);
 
     setTimeout(()=>{
-        console.log("lol");
-        console.log(document.querySelector("#captcha"));
-        document.querySelector("#captcha").click();
+        try{
+            document.querySelector("#captcha").click();
+        }catch(e){}
     },1300)
-    
+
+    setTimeout(()=>{
+        loadmydiv('examinations/StudentDA');
+    },1700)
+
+    setTimeout(()=>{
+        document.querySelector('#semesterSubId').value = 'VL20202105';
+        dAOnChange();
+    },2000)
+
+    setTimeout(()=>{
+        let table = document.querySelectorAll("#fixedTableContainer > table > tbody").item(0)
+        let items = table.getElementsByTagName("tr")
+        for (var i = 1; i < items.length; ++i) {
+            let tr = items[i].getElementsByTagName("td")
+            let subdata = {}
+            subdata.vlcode = tr[1].textContent
+            subdata.code = tr[2].textContent
+            subdata.name = tr[3].textContent
+            subdata.ethla = tr[4].textContent
+            console.log(subdata)
+        }
+        myFunction('VL2020210507509')
+    },3000)
+
+    setTimeout(()=>{
+        let table1 = document.querySelectorAll("#fixedTableContainer > table").item(1).querySelectorAll("tbody").item(1)
+        let items1 = table1.getElementsByTagName("tr")
+        trdataarr = []
+        for (var i = 0; i < items1.length; ++i) {
+            let tr1 = items1[i].getElementsByTagName("td")
+            let trdata = {}
+            trdata.title = tr1[1].textContent;
+            trdata.date = tr1[4].getElementsByTagName("span")[0].textContent; 
+            trdataarr.push(trdata)
+        }
+        console.log(trdataarr)
+    },3500)  
+
     setInterval(function() {
         doRefreshCaptcha()
     },14 * 60 * 1000);`;

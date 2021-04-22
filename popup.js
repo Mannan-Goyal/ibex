@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    chrome.storage.sync.get(null, function (data) { console.info(data) });
+    chrome.storage.sync.get(null, function (data) { console.info('Working!') });
     document.getElementById('subm').addEventListener('click', () => {
         let regno = document.querySelector('#regno').value;
         let pass = document.querySelector('#pass').value;
