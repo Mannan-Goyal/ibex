@@ -1,4 +1,10 @@
-location.href="javascript:openPage(); void 0";
+try{
+if(document.querySelector('.box-title').textContent === 'VTOP for Employee and Students'){
+    location.href="javascript:openPage(); void 0";
+}
+}catch(e){
+    console.log(e);
+}
 let vlcodes = []
 let bitmaps = {
     "1": [
@@ -1263,7 +1269,7 @@ setTimeout(() => {
 
 setTimeout(() => {
     let myFormData = {
-        authorizedID: "20BCE0528",
+        authorizedID: regno,
         semesterSubId: "VL20202105"
     };
 
@@ -1302,9 +1308,9 @@ setTimeout(() => {
         for (let k = 0; k < vlcodes.length; k++) {
 
             let now = new Date();
-            params = "authorizedID=20BCE0528&x=" + now.toUTCString() + "&classId=" + vlcodes[k].vlcode;
+            params = `authorizedID=${regno}&x=${now.toUTCString()}&classId=${vlcodes[k].vlcode}`;
 
-            $.ajax({
+            await $.ajax({
                 url: "examinations/processDigitalAssignment",
                 type: "POST",
                 data: params,
@@ -1330,6 +1336,7 @@ setTimeout(() => {
     let pleaseStop = async () => {
         await getDA()
         chrome.runtime.sendMessage("Hello");
+        console.log(vlcodes)
         chrome.storage.sync.set({
             vlcodes: vlcodes
         }, () => {
