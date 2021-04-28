@@ -3,10 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('subm').addEventListener('click', () => {
         let regno = document.querySelector('#regno').value;
         let pass = document.querySelector('#pass').value;
+        let semester = document.querySelector('select').value;
         console.log(regno, pass);
         chrome.storage.sync.set({
             regno: regno,
-            pass: pass
+            pass: pass,
+            sem: semester
         }, function () {
             console.log('Credentials Saved!');
         });
@@ -36,32 +38,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('#sync').addEventListener('click',()=>{
         chrome.storage.sync.get(['vlcodes'], function (items) {
-            for (let i = 0; i < items.vlcodes.length; ++i) {
-                let sub = items.vlcodes[i].name
-                let ethla = items.vlcodes[i].ethla
-                for(let j = 0; j < items.vlcodes[i].data.length; ++j){
-                    let date = Date.parse(items.vlcodes[i].data[j].date)-Date.now();
-                    console.log(date);
-                    let tbody = document.querySelector('body > div.da > table > tbody');
-                    if(date>0 && date<436800000){
-                        let tr = `<tr style="color:red;">
-                        <td>${sub}</td>
-                        <td>${ethla}</td>
-                        <td>${items.vlcodes[i].data[j].title}</td>
-                        <td>${items.vlcodes[i].data[j].date}</td>
-                        </tr>`;
-                        tbody.innerHTML += tr;
-                }else{
-                    let tr = `<tr>
-                    <td>${sub}</td>
-                    <td>${ethla}</td>
-                    <td>${items.vlcodes[i].data[j].title}</td>
-                    <td>${items.vlcodes[i].data[j].date}</td>
-                    </tr>`;
-                    tbody.innerHTML += tr;
+            if(items.vlcodes.length !== 0){
+                for (let i = 0; i < items.vlcodes.length; ++i) {
+                    let sub = items.vlcodes[i].name
+                    let ethla = items.vlcodes[i].ethla
+                    for(let j = 0; j < items.vlcodes[i].data.length; ++j){
+                        let date = Date.parse(items.vlcodes[i].data[j].date)-Date.now();
+                        console.log(date);
+                        let tbody = document.querySelector('body > div.da > table > tbody');
+                        if(date>0 && date<436800000){
+                            let tr = `<tr style="color:red;">
+                            <td>${sub}</td>
+                            <td>${ethla}</td>
+                            <td>${items.vlcodes[i].data[j].title}</td>
+                            <td>${items.vlcodes[i].data[j].date}</td>
+                            </tr>`;
+                            tbody.innerHTML += tr;
+                        }else{
+                            let tr = `<tr>
+                            <td>${sub}</td>
+                            <td>${ethla}</td>
+                            <td>${items.vlcodes[i].data[j].title}</td>
+                            <td>${items.vlcodes[i].data[j].date}</td>
+                            </tr>`;
+                            tbody.innerHTML += tr;
+                        }
+                    }
                 }
+            }else{
+                tbody.textContent = "Invalid Credentials or Semester!";
             }
-        }});
+        });
     })
     document.querySelector('#update').addEventListener('click',()=>{
         window.open('https://vtop.vit.ac.in', '_blank');

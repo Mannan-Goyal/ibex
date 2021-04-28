@@ -1270,7 +1270,7 @@ setTimeout(() => {
 setTimeout(() => {
     let myFormData = {
         authorizedID: regno,
-        semesterSubId: "VL20202105"
+        semesterSubId: sem
     };
 
     let fxd = new FormData();
@@ -1290,15 +1290,19 @@ setTimeout(() => {
                 let parser = new DOMParser();
                 let doc = parser.parseFromString(response, "text/html");
                 let table = doc.querySelectorAll("#fixedTableContainer > table > tbody").item(0)
-                let items = table.getElementsByTagName("tr")
-                for (let i = 1; i < items.length; ++i) {
-                    let tr = items[i].getElementsByTagName("td")
-                    let subdata = {}
-                    subdata.vlcode = tr[1].textContent
-                    subdata.code = tr[2].textContent
-                    subdata.name = tr[3].textContent
-                    subdata.ethla = tr[4].textContent
-                    vlcodes.push(subdata)
+                try{
+                    let items = table.getElementsByTagName("tr");
+                    for (let i = 1; i < items.length; ++i) {
+                        let tr = items[i].getElementsByTagName("td")
+                        let subdata = {}
+                        subdata.vlcode = tr[1].textContent
+                        subdata.code = tr[2].textContent
+                        subdata.name = tr[3].textContent
+                        subdata.ethla = tr[4].textContent
+                        vlcodes.push(subdata)
+                    }
+                }catch(e){
+                    console.log(e);
                 }
             }
         });
@@ -1344,7 +1348,7 @@ setTimeout(() => {
         });
     }
     pleaseStop()
-    console.log(vlcodes.length, vlcodes)
+    console.log(vlcodes.length, vlcodes);
 }, 1700)
 
 setInterval(function () {
