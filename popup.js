@@ -43,10 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     let sub = items.vlcodes[i].name
                     let ethla = items.vlcodes[i].ethla
                     for(let j = 0; j < items.vlcodes[i].data.length; ++j){
-                        let date = Date.parse(items.vlcodes[i].data[j].date)-Date.now();
+                        let date = Date.parse(items.vlcodes[i].data[j].date)-Date.now()+(24*60*60*1000);
                         console.log(date);
                         let tbody = document.querySelector('body > div.da > table > tbody');
-                        if(date>0 && date<436800000){
+                        if(date>=0 && date<(7*24*60*60*1000)){
                             let tr = `<tr style="color:red;">
                             <td>${sub}</td>
                             <td>${ethla}</td>
