@@ -14,19 +14,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         window.close();
     });
-    document.querySelectorAll('li')[0].addEventListener('click',()=>{
-        document.querySelectorAll('li')[0].classList.toggle('is-active');
-        document.querySelectorAll('li')[1].classList.toggle('is-active');
+    document.querySelectorAll('#login')[0].addEventListener('click',()=>{
+        document.querySelectorAll('.tab')[0].classList.toggle('tab-inact');
+        document.querySelectorAll('.tab')[1].classList.toggle('tab-inact');
         changeDisplay()
     })
-    document.querySelectorAll('li')[1].addEventListener('click',()=>{
-        document.querySelectorAll('li')[1].classList.toggle('is-active');
-        document.querySelectorAll('li')[0].classList.toggle('is-active');
+    document.querySelectorAll('#da')[1].addEventListener('click',()=>{
+        document.querySelectorAll('.tab')[1].classList.toggle('tab-inact');
+        document.querySelectorAll('.tab')[0].classList.toggle('tab-inact');
         changeDisplay()
     })
     function changeDisplay(){
         let ul = document.querySelector('.tabs > ul');
-        if(ul.querySelector('li').getAttribute('class') === 'is-active'){
+        if(ul.querySelector('.tab').getAttribute('class') === 'tab-inact'){
             document.querySelector('.login').style.display = 'block';
             document.querySelector('.da').style.display = 'none';
         }
