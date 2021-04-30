@@ -14,40 +14,49 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         window.close();
     });
-    document.querySelectorAll('#login')[0].addEventListener('click',()=>{
-        document.querySelectorAll('.tab')[0].classList.toggle('tab-inact');
-        document.querySelectorAll('.tab')[1].classList.toggle('tab-inact');
+    document.querySelector('#login').addEventListener('click',()=>{
+        document.querySelector('#da').classList.add('tab-inact');
+        document.querySelector('#login').classList.remove('tab-inact');
         changeDisplay()
     })
-    document.querySelectorAll('#da')[1].addEventListener('click',()=>{
-        document.querySelectorAll('.tab')[1].classList.toggle('tab-inact');
-        document.querySelectorAll('.tab')[0].classList.toggle('tab-inact');
+    document.querySelector('#da').addEventListener('click',()=>{
+        document.querySelector('#da').classList.remove('tab-inact');
+        document.querySelector('#login').classList.add('tab-inact');
         changeDisplay()
     })
     function changeDisplay(){
-        let ul = document.querySelector('.tabs > ul');
-        if(ul.querySelector('.tab').getAttribute('class') === 'tab-inact'){
-            document.querySelector('.login').style.display = 'block';
-            document.querySelector('.da').style.display = 'none';
+        let ul = document.querySelector('.tabs-container');
+        if(ul.querySelector('#da').getAttribute('class').includes('tab-inact')){
+            console.log(1)
+            document.querySelector('#logindiv').style.display = 'block';
+            document.querySelector('#dadiv').style.display = 'none';
         }
         else{
-            document.querySelector('.login').style.display = 'none';
-            document.querySelector('.da').style.display = 'block';
+            console.log(2)
+            document.querySelector('#logindiv').style.display = 'none';
+            document.querySelector('#dadiv').style.display = 'block';
         }
     }
 
-    document.querySelector('#sync').addEventListener('click',()=>{
+    document.querySelector('#da').addEventListener('click',()=>{
+        let temptrash = document.querySelector('#dadiv > div > table > tbody').innerHTML.trim()
+        console.log(temptrash)
+        if (temptrash!=''){
+            return;
+        }
         chrome.storage.sync.get(['vlcodes'], function (items) {
             if(items.vlcodes.length !== 0){
                 for (let i = 0; i < items.vlcodes.length; ++i) {
                     let sub = items.vlcodes[i].name
                     let ethla = items.vlcodes[i].ethla
+                    items.vlcodes.sort((a, b) => Date.parse(b.data.date) - Date.parse(a.data.date));
                     for(let j = 0; j < items.vlcodes[i].data.length; ++j){
                         let date = Date.parse(items.vlcodes[i].data[j].date)-Date.now()+(24*60*60*1000);
                         console.log(date);
-                        let tbody = document.querySelector('body > div.da > table > tbody');
+                        let tbody = document.querySelector('#dadiv > div > table > tbody');
                         if(date>=0 && date<(7*24*60*60*1000)){
-                            let tr = `<tr style="color:red;">
+                            console.log("set red")
+                            let tr = `<tr class="due item">
                             <td>${sub}</td>
                             <td>${ethla}</td>
                             <td>${items.vlcodes[i].data[j].title}</td>
@@ -55,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             </tr>`;
                             tbody.innerHTML += tr;
                         }else{
-                            let tr = `<tr>
+                            let tr = `<tr class="item">
                             <td>${sub}</td>
                             <td>${ethla}</td>
                             <td>${items.vlcodes[i].data[j].title}</td>

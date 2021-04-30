@@ -9,21 +9,23 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet"> 
-  
+  <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+
 </head>
 <body>
-	<div class="ext-border">
+	<div>
       <div class="tabs-container">
         <div class="tab" id="login"><b>Login</b></div>
         <div class="tab tab-inact" id="da">DA</div>
       </div>
-		<div class="login">
+		<div class="login" id="logindiv" style="display: block;">
 			<div class="container">
 				<form action="">				
-                    <img src="https://i.imgur.com/CNC8z8m.png" class="logo-img"/>
+                    <img src="https://i.imgur.com/CNC8z8m.png" class="logo-img" draggable='false'/>
 					<div class="logo">IBEX</div>
                     <input id="regno" class="input" type="text" placeholder="Reg No" autocomplete="off">
 					<input id="pass" class="input" type="password" autocomplete="off" placeholder="Password">
@@ -68,24 +70,31 @@
 				</form>
 			</div>
 		</div>
-		<div class="da">
-			<table class="table">
-				<thead>
-				  <tr>
-					<th>Subject</th>
-					<th>Type</th>
-					<th>Title</th>
-					<th>Due Date</th>
-				  </tr>
-				</thead>
-				<tbody>
-			
-				</tbody>
-			  </table>
-			  <button class="button" id="sync">Sync</button>
-			  <button class="button" id="update">Update & Open VTOP</button>
+		<div class="da" id="dadiv" style="display: none;">
+			<div class="flex-center">
+				<input id="update" class="subm" type="submit" value="Update Table" style="font-size: 18px;font-family: 'Raleway', sans-serif;">
+			</div>
+			<div class="flex-center">
+				<p class="light-text" style="font-size: 13px;font-family: 'Raleway', sans-serif;">After clicking on update button vtop will open, then you can reopen the extension to view updated table</p>
+			</div>
+			<div class="flex-center">
+				<table class="table sortable" style="background-color: #222;">
+					<thead>
+					  <tr id="tabletitle">
+						<th>Subject &nbsp&nbsp&nbsp</th>
+						<th>Type &nbsp&nbsp&nbsp&nbsp&nbsp</th>
+						<th>Title &nbsp&nbsp&nbsp</th>
+						<th>Due Date&nbsp&nbsp&nbsp</th>
+					  </tr>
+					</thead>
+					<tbody>
+				
+					</tbody>
+				  </table>
+			</div>
 		</div>
 	</div>
 	<script src="./popup.js"></script>
+	<script src="./sorttable.js"></script>
 </body>
 </html>

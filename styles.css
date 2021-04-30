@@ -1,4 +1,23 @@
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background: #8645DA;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7c3ccf;
+} 
+
 select.classic {
+  position: relative;
+  z-index: 99;
   background-image:
     linear-gradient(45deg, transparent 50%, #121212 50%),
     linear-gradient(135deg, #121212 50%, transparent 50%),
@@ -12,6 +31,43 @@ select.classic {
     10px 10px,
     2.5em 2.5em;
   background-repeat: no-repeat;
+}
+
+.table tr:nth-child(odd){ 
+    background: #000;
+}
+.table tr:nth-child(even){
+    background: #1e1e1e;
+}
+
+.table{
+  text-align: left;
+  padding: 0px;
+  border-spacing: 0px;
+  width: 85vw;
+}
+
+.due{
+  color: #ff2626 !important;
+}
+
+table {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+tbody > tr > td{
+  font-size: 13px;
+  padding: 7px 0px;
+}
+
+th{
+  color: #8645DA;
+  font-size: 18px;
+}
+
+#tabletitle > th{
+  border-bottom: 4px #8645DA solid;
 }
 
 select.classic:focus {
@@ -46,7 +102,7 @@ select {
 
 .subm{
   outline: none;
-  width: 83vw;
+  width: 85vw;
   height: 45px;
   border-radius: 25px;
   background-color: #8645DA;
@@ -54,6 +110,14 @@ select {
   color: black;
   cursor:pointer;
   border: none;
+}
+.light-text{
+  color: #fff;
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;
 }
 
 .input {
@@ -94,17 +158,27 @@ select {
 }
 
 body {
-  background-color: #121212;
+  background-color: #000;
+}
+
+#logindiv{
   width: 340px;
   height: 523px;
 }
 
+#dadiv{
+  padding: 20px 20px 20px 20px;
+  justify-content: center;
+  width: 712px;
+  height: 611px;
+}
+
 html{
-  background-color: #121212 !important;
+  background-color: #000 !important;
 }
 
 .tabs-container{
-  margin: 7px ;
+  margin: 0px 5vw;
   display: flex;
   flex-direction: row;
   height: 44px;
@@ -112,13 +186,18 @@ html{
 }
 
 .tab{
+  cursor:pointer;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
   border-bottom: 3px solid #8645DA;
   padding: 6px 0px;
   font-family: 'PT Sans', sans-serif;
   font-size: 24px;
   color: #3A3939;
   text-align: center;
-  width: 135px;
+  width: 49%;
 }
 
 .tab-inact{
