@@ -45,34 +45,49 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         chrome.storage.sync.get(['vlcodes'], function (items) {
-            if(items.vlcodes.length !== 0){
-                for (let i = 0; i < items.vlcodes.length; ++i) {
-                    let sub = items.vlcodes[i].name
-                    let ethla = items.vlcodes[i].ethla
-                    items.vlcodes.sort((a, b) => Date.parse(b.data.date) - Date.parse(a.data.date));
-                    for(let j = 0; j < items.vlcodes[i].data.length; ++j){
-                        let date = Date.parse(items.vlcodes[i].data[j].date)-Date.now()+(24*60*60*1000);
-                        console.log(date);
-                        let tbody = document.querySelector('#dadiv > div > table > tbody');
-                        if(date>=0 && date<(7*24*60*60*1000)){
-                            console.log("set red")
-                            let tr = `<tr class="due item">
-                            <td>${sub}</td>
-                            <td>${ethla}</td>
-                            <td>${items.vlcodes[i].data[j].title}</td>
-                            <td>${items.vlcodes[i].data[j].date}</td>
-                            </tr>`;
-                            tbody.innerHTML += tr;
-                        }else{
-                            let tr = `<tr class="item">
-                            <td>${sub}</td>
-                            <td>${ethla}</td>
-                            <td>${items.vlcodes[i].data[j].title}</td>
-                            <td>${items.vlcodes[i].data[j].date}</td>
-                            </tr>`;
-                            tbody.innerHTML += tr;
-                        }
+            let obj = items.vlcodes;
+            let flat = [];
+            console.log(obj);
+            for(let i =0; i<obj.length;i++){
+                for(let j =0; j<obj[i].data.length;j++){
+                    let temp = {};
+                    temp.code = obj[i].code;
+                    temp.name = obj[i].name;
+                    temp.ethla = obj[i].ethla;
+                    temp.title = obj[i].data[j].title;
+                    temp.date = obj[i].data[j].date;
+                    flat[flat.length] = temp;
+                }
+            }
+            flat.sort((b, a) => Date.parse(b.date) - Date.parse(a.date));
+            console.log(flat);
+            if(flat.length !== 0){
+                for (let i = 0; i < flat.length; ++i) {
+                    let sub = flat[i].name
+                    let ethla = flat[i].ethla
+                    let date = Date.parse(flat[i].date)-Date.now()+(24*60*60*1000);
+                    console.log(date);
+                    let tbody = document.querySelector('#dadiv > div > table > tbody');
+                    if(date<0){
+                        continue;
                     }
+                    else if(date>=0 && date<(1*24*60*60*1000)){
+                        let tr = `<tr class="due-1 item cname-${i}"></tr>`;
+                        tbody.innerHTML += tr;
+                    }
+                    else if(date>=0 && date<(7*24*60*60*1000)){
+                        let tr = `<tr class="due-7 item cname-${i}"></tr>`;
+                        tbody.innerHTML += tr;
+                    }else{
+                        let tr = `<tr class="item cname-${i}"></tr>`;
+                        tbody.innerHTML += tr;
+                    }
+                    document.querySelector(`.cname-${i}`).innerHTML += `
+                    <td>${sub}</td>
+                    <td>${ethla}</td>
+                    <td>${flat[i].title}</td>
+                    <td>${flat[i].date}</td>
+                    `;
                 }
             }else{
                 tbody.textContent = "Invalid Credentials or Semester!";

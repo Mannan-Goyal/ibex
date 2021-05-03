@@ -45,10 +45,15 @@ select.classic {
   padding: 0px;
   border-spacing: 0px;
   width: 85vw;
+  margin-bottom: 20px;
 }
 
-.due{
+.due-1{
   color: #ff2626 !important;
+}
+
+.due-7{
+  color: #dad737 !important;
 }
 
 table {
@@ -88,6 +93,8 @@ select.classic:focus {
 }
 
 select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   outline: none;
   width: 83vw;
   margin: 20px 0px;
