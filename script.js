@@ -1,1 +1,1 @@
-chrome.runtime.sendMessage('run-script');    
+chrome.runtime.sendMessage('run-script');

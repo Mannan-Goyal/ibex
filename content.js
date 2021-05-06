@@ -1350,8 +1350,3 @@ setTimeout(() => {
     pleaseStop()
     console.log(vlcodes.length, vlcodes);
 }, 1700)
-
-setInterval(function () {
-    doRefreshCaptcha()
-}, 14 * 60 * 1000);
-
