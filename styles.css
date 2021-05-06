@@ -15,22 +15,19 @@
   background: #7c3ccf;
 } 
 
-select.classic {
-  position: relative;
-  z-index: 99;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #121212 50%),
-    linear-gradient(135deg, #121212 50%, transparent 50%),
-    linear-gradient(to right, #8645DA, #8645DA);
-  background-position:
-    calc(100% - 30px) calc(1em - 4px),
-    calc(100% - 20px) calc(1em - 4px),
-    100% 0;
-  background-size:
-    10px 10px,
-    10px 10px,
-    2.5em 2.5em;
-  background-repeat: no-repeat;
+select {
+  appearance: none;
+  background: url("arrow.png") 96% / 15% no-repeat #eee;
+  outline: none;
+  width: 83vw;
+  margin: 20px 0px;
+  height: 45px;
+  border-radius: 25px;
+  background-color: #272424;
+  border: 1px #8645DA solid;
+  color: #6C6C6C;
+  padding-left: 20px;
+  font-size: 24px;
 }
 
 .table tr:nth-child(odd){ 
@@ -75,37 +72,7 @@ th{
   border-bottom: 4px #8645DA solid;
 }
 
-select.classic:focus {
-  background-image:
-    linear-gradient(45deg,  #121212 50%, transparent 50%),
-    linear-gradient(135deg, transparent 50%, #121212 50%),
-    linear-gradient(to right, #8645DA, #8645DA);
-  background-position:
-    calc(100% - 20px) calc(1em - 4px),
-    calc(100% - 30px) calc(1em - 4px),
-    100% 0;
-  background-size:
-    10px 10px,
-    10px 10px,
-    2.5em 2.5em;
-  background-repeat: no-repeat;
-  outline: 0;
-}
 
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  width: 83vw;
-  margin: 20px 0px;
-  height: 45px;
-  border-radius: 25px;
-  background-color: #121212;
-  border: 1px #8645DA solid;
-  color: #6C6C6C;
-  padding-left: 20px;
-  font-size: 24px;
-}
 
 .subm{
   outline: none;
