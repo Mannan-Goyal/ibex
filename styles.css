@@ -19,10 +19,10 @@ select {
   appearance: none;
   background: url("assets/arrow.png") 96% / 15% no-repeat #eee;
   outline: none;
-  width: 83vw;
+  width: 95%;
   margin: 20px 0px;
   height: 45px;
-  border-radius: 25px;
+  border-radius: 5px;
   background-color: #272424;
   border: 0px #121212 solid;
   color: #6C6C6C;
@@ -41,7 +41,7 @@ select {
   text-align: left;
   padding: 0px;
   border-spacing: 0px;
-  width: 85vw;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -72,13 +72,11 @@ th{
   border-bottom: 4px #8645DA solid;
 }
 
-
-
 .subm{
   outline: none;
-  width: 85vw;
+  width: 97%;
   height: 45px;
-  border-radius: 25px;
+  border-radius: 5px;
   background-color: #8645DA;
   font-size: 24px;
   color: black;
@@ -96,9 +94,9 @@ th{
 
 .input {
   outline: none;
-  width: 75vw;
+  width: 85%;
   height: 34px;
-  border-radius: 25px;
+  border-radius: 5px;
   margin: 10px 0px;
   border: 2px #272424 solid;
   background-color: #272424;
@@ -128,7 +126,7 @@ th{
   width: 100px;
   position: absolute;
   top: 85px;
-  left: calc(50vw - 50px);
+  left: calc(50% - 50px);
 }
 
 body {
@@ -181,34 +179,42 @@ html{
 .da{
 	display: none;
 }
+
 .container{
 	height: 100%;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 }
+
 .container h2{
 	color: white;
 	padding-bottom: 18px;
 }
+
 form{
 	width: 95%;
 	padding: 20px 20px 20px 20px;
 	border-radius: 7px;
 	text-align: center;
 }
+
 form input{
 	padding: 5px;
 }
+
 body > div.tabs.is-toggle.is-fullwidth > ul > li > a{
 	border-radius: 0;
 }
+
 body > div.login > div > form > input:nth-child(2){
 	margin-bottom: 12px;
 }
+
 input[type=submit]{
 	margin-top: 7px;
 }
+
 table{
 	font-size: 12px;
 	width: 600px;
