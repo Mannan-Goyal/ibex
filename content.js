@@ -1,11 +1,12 @@
-try{
-if(document.querySelector('.box-title').textContent === 'VTOP for Employee and Students'){
-    location.href="javascript:openPage(); void 0";
-}
-}catch(e){
+try {
+    if (document.querySelector('.box-title').textContent === 'VTOP for Employee and Students') {
+        location.href = "javascript:openPage(); void 0";
+    }
+} catch (e) {
     console.log(e);
 }
 let vlcodes = []
+let semlist = ""
 let bitmaps = {
     "1": [
         [255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255],
@@ -1290,7 +1291,7 @@ setTimeout(() => {
                 let parser = new DOMParser();
                 let doc = parser.parseFromString(response, "text/html");
                 let table = doc.querySelectorAll("#fixedTableContainer > table > tbody").item(0)
-                try{
+                try {
                     let items = table.getElementsByTagName("tr");
                     for (let i = 1; i < items.length; ++i) {
                         let tr = items[i].getElementsByTagName("td")
@@ -1301,7 +1302,7 @@ setTimeout(() => {
                         subdata.ethla = tr[4].textContent
                         vlcodes.push(subdata)
                     }
-                }catch(e){
+                } catch (e) {
                     console.log(e);
                 }
             }
@@ -1337,12 +1338,30 @@ setTimeout(() => {
             });
         }
     }
+
+    async function getSems() {
+        var winImage = $("#winImage").val();
+        var authorizedID = $("#authorizedIDX").val();
+        await $.ajax({
+            url: "examinations/StudentDA",
+            type: "POST",
+            data: "verifyMenu=true&winImage=" + winImage + "&authorizedID=" + authorizedID + "&nocache=@(new Date().getTime())",
+            success: function (response) {
+                const parser = new DOMParser();
+                const document1 = parser.parseFromString(response, "text/html");
+                semlist += document1.querySelector("select").innerHTML.replace(/\t/g, '').split('\n').slice(3, -1).join().replace(',', '\n')
+            }
+        });
+    }
     let pleaseStop = async () => {
         await getDA()
+        await getSems()
         chrome.runtime.sendMessage("Hello");
         console.log(vlcodes)
+        console.log(semlist)
         chrome.storage.sync.set({
-            vlcodes: vlcodes
+            vlcodes: vlcodes,
+            semlist: semlist
         }, () => {
             console.log('Data saved!')
         });

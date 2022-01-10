@@ -14,42 +14,49 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         window.close();
     });
-    document.querySelector('#login').addEventListener('click',()=>{
+    document.querySelector('#login').addEventListener('click', () => {
         document.querySelector('#da').classList.add('tab-inact');
         document.querySelector('#login').classList.remove('tab-inact');
         changeDisplay()
     })
-    document.querySelector('#da').addEventListener('click',()=>{
+    document.querySelector('#da').addEventListener('click', () => {
         document.querySelector('#da').classList.remove('tab-inact');
         document.querySelector('#login').classList.add('tab-inact');
         changeDisplay()
     })
-    function changeDisplay(){
+    function changeDisplay() {
         let ul = document.querySelector('.tabs-container');
-        if(ul.querySelector('#da').getAttribute('class').includes('tab-inact')){
+        if (ul.querySelector('#da').getAttribute('class').includes('tab-inact')) {
             console.log(1)
             document.querySelector('#logindiv').style.display = 'block';
             document.querySelector('#dadiv').style.display = 'none';
         }
-        else{
+        else {
             console.log(2)
             document.querySelector('#logindiv').style.display = 'none';
             document.querySelector('#dadiv').style.display = 'block';
         }
     }
 
-    document.querySelector('#da').addEventListener('click',()=>{
+    chrome.storage.sync.get(['semlist'], function (data) {
+        let obj = data.semlist;
+        console.log(obj)
+        document.querySelector(".classic").innerHTML += obj
+        console.log("Success :)))")
+    })
+
+    document.querySelector('#da').addEventListener('click', () => {
         let temptrash = document.querySelector('#dadiv > div > table > tbody').innerHTML.trim()
         console.log(temptrash)
-        if (temptrash!=''){
+        if (temptrash != '') {
             return;
         }
         chrome.storage.sync.get(['vlcodes'], function (items) {
             let obj = items.vlcodes;
             let flat = [];
             console.log(obj);
-            for(let i =0; i<obj.length;i++){
-                for(let j =0; j<obj[i].data.length;j++){
+            for (let i = 0; i < obj.length; i++) {
+                for (let j = 0; j < obj[i].data.length; j++) {
                     let temp = {};
                     temp.code = obj[i].code;
                     temp.name = obj[i].name;
@@ -61,24 +68,24 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             flat.sort((b, a) => Date.parse(b.date) - Date.parse(a.date));
             console.log(flat);
-            if(flat.length !== 0){
+            if (flat.length !== 0) {
                 for (let i = 0; i < flat.length; ++i) {
                     let sub = flat[i].name
                     let ethla = flat[i].ethla
-                    let date = Date.parse(flat[i].date)-Date.now()+(24*60*60*1000);
+                    let date = Date.parse(flat[i].date) - Date.now() + (24 * 60 * 60 * 1000);
                     console.log(date);
                     let tbody = document.querySelector('#dadiv > div > table > tbody');
-                    if(date<0){
+                    if (date < 0) {
                         continue;
                     }
-                    else if(date>=0 && date<(1*24*60*60*1000)){
+                    else if (date >= 0 && date < (1 * 24 * 60 * 60 * 1000)) {
                         let tr = `<tr class="due-1 item cname-${i}"></tr>`;
                         tbody.innerHTML += tr;
                     }
-                    else if(date>=0 && date<(7*24*60*60*1000)){
+                    else if (date >= 0 && date < (7 * 24 * 60 * 60 * 1000)) {
                         let tr = `<tr class="due-7 item cname-${i}"></tr>`;
                         tbody.innerHTML += tr;
-                    }else{
+                    } else {
                         let tr = `<tr class="item cname-${i}"></tr>`;
                         tbody.innerHTML += tr;
                     }
@@ -89,12 +96,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${flat[i].date}</td>
                     `;
                 }
-            }else{
+            } else {
                 tbody.textContent = "Invalid Credentials or Semester!";
             }
         });
     })
-    document.querySelector('#update').addEventListener('click',()=>{
+    document.querySelector('#update').addEventListener('click', () => {
         window.open('https://vtop.vit.ac.in', '_blank');
     })
 });
